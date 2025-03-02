@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import RegisterForm from "./pages/RegisterForm";
 import LoginForm from "./pages/LoginForm";
@@ -8,12 +8,15 @@ import Notifications from "./pages/Notifications";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import LightSwitch from "./components/LightSwitch";
+import { ToastContainer } from "react-toastify";
 
 function App() {
+  const location=useLocation()
   return (
     <>
-<Sidebar/>
-<Navbar/>
+    {location.pathname !=="/login" && <Sidebar/ > && location.pathname !=="/" && <Sidebar/ >
+ }
+{/* <Navbar/> */}
 {/* <LightSwitch/> */}
       <Routes>
         <Route path="/" element={<RegisterForm />} />
@@ -21,6 +24,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/dashboard" element={<HomePage/>} />
       </Routes>
+      <ToastContainer/>
     </>
   );
 }
